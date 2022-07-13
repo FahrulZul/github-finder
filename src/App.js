@@ -16,7 +16,7 @@ function App() {
                         <Navbar />
 
                         <main>
-                            <div className="container mx-auto my-8 px-4">
+                            <div className="container mx-auto mb-8 px-4 xl:px-24">
                                 <Routes>
                                     <Route exact path="/" element={<Home />} />
                                     <Route path="/about" element={<About />} />

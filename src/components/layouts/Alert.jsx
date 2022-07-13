@@ -7,16 +7,16 @@ function Alert() {
 
     return (
         alert !== null && (
-            <div className="flex items-center">
+            <div className="flex items-center mb-2">
                 {alert.type === "error" && (
                     <div>
                         <BiErrorCircle
                             size="25"
-                            className="text-red-400 mr-1"
+                            className="text-red-300 mr-1"
                         />
                     </div>
                 )}
-                <p className="font-semibold">Please enter something</p>
+                <p className="text-stone-600">{alert.msg}</p>
             </div>
         )
     );

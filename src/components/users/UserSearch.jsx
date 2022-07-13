@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import GithubContext from "../../context/github/GithubContext";
 import AlertContext from "../../context/alert/AlertContext";
+import Alert from "../layouts/Alert";
 
 function UserSearch() {
     const { users, searchUser, clearUsers } = useContext(GithubContext);
@@ -23,7 +24,8 @@ function UserSearch() {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2">
-            <div>
+            <div className="h-24 flex flex-col justify-end">
+                <Alert />
                 <form className="relative mb-6" onSubmit={handleSubmit}>
                     <input
                         type="text"
@@ -39,7 +41,7 @@ function UserSearch() {
             </div>
 
             {users.length > 0 && (
-                <div>
+                <div className="h-24 flex items-center">
                     <button
                         className="btn btn-ghost rounded-lg md:ml-4"
                         onClick={clearUsers}
