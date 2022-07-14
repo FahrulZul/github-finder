@@ -7,3 +7,7 @@
         font-family: "Sen", sans-serif;
     }
 }
+
+.card.image-full:before {
+    opacity: 0.3;
+}

@@ -11,7 +11,7 @@ function UserItem({ user: { login, avatar_url } }) {
             <div className="pl-6">
                 <p className="text-lg mb-1 font-bold">{login}</p>
                 <Link
-                    to={`/users/${login}`}
+                    to={`/user/${login}`}
                     className="link link-hover text-xs text-gray-400"
                 >
                     Visit profile
