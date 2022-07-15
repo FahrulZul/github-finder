@@ -1,17 +1,28 @@
 import { useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
-import { MdGroups } from "react-icons/md";
+import { MdOutlineStorefront } from "react-icons/md";
+import { FaCodepen } from "react-icons/fa";
+import { BiUserPlus, BiUserCheck } from "react-icons/bi";
 import Spinner from "../components/layouts/Spinner";
 import GithubContext from "../context/github/GithubContext";
+import RepoList from "../components/repos/RepoList";
+import { getUserAndRepos } from "../context/github/GithubActions";
 
 function User() {
-    const { getUser, user, isLoading } = useContext(GithubContext);
+    const { user, repos, isLoading, dispatch } = useContext(GithubContext);
+
     const params = useParams();
 
     useEffect(() => {
-        getUser(params.login);
-    }, []);
+        dispatch({ type: "SET_LOADING" });
+        const getUserAndReposData = async () => {
+            const userData = await getUserAndRepos(params.login);
+            dispatch({ type: "GET_USER_AND_REPOS", payload: userData });
+        };
+
+        getUserAndReposData();
+    }, [dispatch, params.login]);
 
     if (isLoading) {
         return <Spinner />;
@@ -39,13 +50,13 @@ function User() {
                     </div>
                 </div>
                 <div className="col-span-2">
-                    <h1 className="text-3xl card-title mb-6">
+                    <h1 className="text-4xl font-extrabold card-title mb-6">
                         {user.name}
-                        <div className="badge badge-outline badge-success ml-2 mr-1">
+                        <div className="badge badge-outline text-emerald-500 ml-2 mr-1">
                             {user.type}
                         </div>
                         {user.hireable && (
-                            <div className="badge badge-outline badge-info mx-1">
+                            <div className="badge badge-outline text-purple-500 mx-1">
                                 Hireable
                             </div>
                         )}
@@ -86,7 +97,7 @@ function User() {
                                         href={user.blog}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="btn-link hover:text-indigo-500"
+                                        className="btn-link hover:text-blue-500"
                                     >
                                         {user.blog}
                                     </a>
@@ -104,7 +115,7 @@ function User() {
                                         href={`https://twitter.com/${user.twitter_username}`}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="btn-link hover:text-indigo-500"
+                                        className="btn-link hover:text-blue-500"
                                     >
                                         @{user.twitter_username}
                                     </a>
@@ -115,74 +126,43 @@ function User() {
                 </div>
             </div>
 
-            <div className="stats w-full shadow">
+            <div className="stats w-full shadow mb-14">
                 <div className="stat">
-                    <div className="stat-figure text-6xl text-indigo-500">
-                        <MdGroups />
+                    <div className="stat-figure text-zinc-400">
+                        <BiUserPlus size={53} />
                     </div>
                     <div className="stat-title">Followers</div>
                     <div className="stat-value">{user.followers}</div>
                 </div>
 
                 <div className="stat">
-                    <div className="stat-figure text-6xl text-indigo-500">
-                        <MdGroups />
+                    <div className="stat-figure text-zinc-400">
+                        <BiUserCheck size={53} />
                     </div>
-                    <div className="stat-title">Followers</div>
-                    <div className="stat-value">{user.followers}</div>
+                    <div className="stat-title">Following</div>
+                    <div className="stat-value">{user.following}</div>
                 </div>
 
                 <div className="stat">
-                    <div className="stat-figure text-6xl text-indigo-500">
-                        <MdGroups />
+                    <div className="stat-figure text-zinc-400">
+                        <FaCodepen size={42} />
                     </div>
-                    <div className="stat-title">Followers</div>
-                    <div className="stat-value">{user.followers}</div>
+                    <div className="stat-title">Public Repos</div>
+                    <div className="stat-value">{user.public_repos}</div>
                 </div>
 
                 <div className="stat">
-                    <div className="stat-figure text-6xl text-indigo-500">
-                        <MdGroups />
+                    <div className="stat-figure text-zinc-400">
+                        <MdOutlineStorefront size={45} />
                     </div>
-                    <div className="stat-title">Followers</div>
-                    <div className="stat-value">{user.followers}</div>
+                    <div className="stat-title">Public Gist</div>
+                    <div className="stat-value">{user.public_gists}</div>
                 </div>
             </div>
+
+            <RepoList repos={repos} />
         </div>
     );
 }
 
 export default User;
-
-// login
-// id
-// node_id
-// avatar_url
-// gravatar_id
-// url
-// html_url
-// followers_url
-// following_url
-// gists_url
-// starred_url
-// subscriptions_url
-// organizations_url
-// repos_url
-// events_url
-// received_events_url
-// type
-// site_admin
-// name
-// company
-// blog
-// location
-// email
-// hireable
-// bio
-// twitter_username
-// public_repos
-// public_gists
-// followers
-// following
-// created_at
-// updated_at

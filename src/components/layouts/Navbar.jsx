@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { FaGithubAlt } from "react-icons/fa";
+import { VscGithubAlt } from "react-icons/vsc";
 
 function Navbar({ title }) {
     return (
@@ -8,7 +8,7 @@ function Navbar({ title }) {
             <div className="flex justify-between items-center h-28 container mx-auto px-4 xl:px-24">
                 <div className="flex-1">
                     <Link to="/" className="my-4 flex items-center">
-                        <FaGithubAlt size={30} className="mr-1" />
+                        <VscGithubAlt size={30} className="mr-1" />
                         <h1 className="text-xl font-bold">{title}</h1>
                     </Link>
                 </div>
