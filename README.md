@@ -1,16 +1,27 @@
-# Github Finder
+### Github Finder
 
-> React app to search Github profiles. This app uses the Context API along with the useContext and useReducer hooks for state management and is part of the "Modern React Front To Back" course.
+A React app that allows you to search for Github users and view their profile, bio, number of followers, and latest repositories.
 
-## Usage
+This project is live on https://fz-github-finder.vercel.app/
 
-### `npm install`
+#### Usage
 
-### `npm start`
+1. Clone the repository.
+2. Run `npm install` to install dependencies.
+3. Create a .env file in the root of the project and add your Github API token key and API URL like so:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000)
+```
+REACT_APP_GITHUB_TOKEN=YOUR_TOKEN_HERE
+REACT_APP_API_URL = "https://api.github.com"
+```
 
-### `npm run build`
+4. Run `npm start` to start the development server.
+5. The app will be running on http://localhost:3000.
 
-Builds the app for production to the `build` folder.<br>
+#### Built With
+
+-   React
+-   Github API
+-   Axios
+-   Tailwind
+-   daisyUI
